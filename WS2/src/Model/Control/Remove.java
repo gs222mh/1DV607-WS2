@@ -1,4 +1,4 @@
-package Control;
+package Model.Control;
 
 import Model.Member;
 import org.json.JSONArray;

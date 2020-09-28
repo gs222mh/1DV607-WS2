@@ -1,4 +1,4 @@
-package Control;
+package Model.Control;
 
 import org.json.JSONArray;
 import org.json.JSONException;

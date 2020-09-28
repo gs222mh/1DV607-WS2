@@ -1,6 +1,6 @@
 package View;
 
-import Control.*;
+import Model.Control.*;
 import Model.Member;
 import Model.Boat;
 import org.json.JSONException;

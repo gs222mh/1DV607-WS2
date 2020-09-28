@@ -1,4 +1,4 @@
-package Control;
+package Model.Control;
 
 import Model.Boat;
 import Model.Member;
@@ -30,7 +30,7 @@ public class Register {
     public Register() {
     }
 
-    public void addMember(Model.Member member) {
+    public void addMember(Member member) {
         JSONObject addMem = new JSONObject();
         JSONArray arr = new JSONArray();
 
