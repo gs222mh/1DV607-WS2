@@ -6,17 +6,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class DBControl {
-    public DBControl(){
+    public File file = new File("/home/ghayth/Desktop/DB.json");
 
+    public DBControl() {
     }
-    public JSONArray dbRecall() {
+
+    public JSONArray dbRead() {
 
         try {
-            File file = new File("/home/ghayth/Desktop/DB.json");
             Scanner sT = new Scanner(file);
             String text = "";
             JSONObject obj;
@@ -33,10 +36,10 @@ public class DBControl {
         }
         return null;
     }
+
     public boolean check(Member member) {
         boolean checking = false;
         try {
-            File file = new File("/home/ghayth/Desktop/DB.json");
             if (!file.createNewFile()) {
                 Scanner sT = new Scanner(file);
                 String text = "";
@@ -61,5 +64,31 @@ public class DBControl {
             e.printStackTrace();
         }
         return checking;
+    }
+
+    public void dbWrite(JSONArray list) {
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            writer.print("");
+            writer.close();
+            try {
+                if (file.createNewFile()) {
+                    FileWriter input = new FileWriter(file, true);
+                    for (int i = 0; i < list.length(); i++)
+                        input.write(list.getJSONObject(i) + "\n");
+                    input.close();
+
+                } else {
+                    FileWriter fr = new FileWriter(file, true);
+                    for (int i = 0; i < list.length(); i++)
+                        fr.write(list.getJSONObject(i) + "\n");
+                    fr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

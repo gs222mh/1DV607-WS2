@@ -7,10 +7,6 @@ import org.json.JSONException;
 import org.json.simple.JSONObject;
 
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 
 
@@ -31,6 +27,8 @@ public class Register {
     }
 
     public void addMember(Member member) {
+        DBControl db = new DBControl();
+        JSONArray list = db.dbRead();
         JSONObject addMem = new JSONObject();
         JSONArray arr = new JSONArray();
 
@@ -39,25 +37,8 @@ public class Register {
         addMem.put("ID", id);
         addMem.put("Boats", arr);
 
-        try {
-            File Name_File = new File("/home/ghayth/Desktop/DB.json");
-            try {
-                if (Name_File.createNewFile()) {
-                    FileWriter input = new FileWriter(Name_File, true);
-                    input.write(addMem.toJSONString() + "\n");
-                    input.close();
-
-                } else {
-                    FileWriter fr = new FileWriter(Name_File, true);
-                    fr.write(addMem.toJSONString() + "\n");
-                    fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        list.put(addMem);
+        db.dbWrite(list);
     }
 
     public void idGenerator(Member member) {
@@ -76,7 +57,7 @@ public class Register {
 
     public void search(Member member) throws JSONException {
         DBControl db = new DBControl();
-        JSONArray list = db.dbRecall();
+        JSONArray list = db.dbRead();
         for (int i = 0; i < list.length(); i++) {
             if (list.getJSONObject(i).get("Personal_Number").equals(member.getPn())) {
                 result = true;
@@ -95,7 +76,7 @@ public class Register {
 
     public void addBoat(Boat boat, Member member) throws JSONException {
         DBControl db = new DBControl();
-        JSONArray list = db.dbRecall();
+        JSONArray list = db.dbRead();
         org.json.JSONObject boats = new org.json.JSONObject();
         boats.put("type", boat.getType());
         boats.put("size", boat.getSize());
@@ -107,29 +88,6 @@ public class Register {
                 break;
             }
         }
-        try {
-            File dataBase = new File("/home/ghayth/Desktop/DB.json");
-            PrintWriter writer = new PrintWriter(dataBase);
-            writer.print("");
-            writer.close();
-            try {
-                if (dataBase.createNewFile()) {
-                    FileWriter input = new FileWriter(dataBase, true);
-                    for (int i = 0; i < list.length(); i++)
-                        input.write(list.getJSONObject(i) + "\n");
-                    input.close();
-
-                } else {
-                    FileWriter fr = new FileWriter(dataBase, true);
-                    for (int i = 0; i < list.length(); i++)
-                        fr.write(list.getJSONObject(i) + "\n");
-                    fr.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        db.dbWrite(list);
     }
 }

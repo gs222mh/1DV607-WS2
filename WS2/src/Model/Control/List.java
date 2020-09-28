@@ -12,11 +12,9 @@ public class List {
 
     public void compact() throws JSONException, IOException {
         DBControl db = new DBControl();
-        JSONArray list = db.dbRecall();
+        JSONArray list = db.dbRead();
         System.out.println("Name" + "\t" + "PN" + "\t\t\t" + "ID");
-        File file = new File("/home/ghayth/Desktop/DB.json");
-        if (!file.createNewFile()) {
-
+        if (!db.file.createNewFile()) {
             for (int i = 0; i < list.length(); i++) {
                 if (list.getJSONObject(i).get("name").toString().length() <= 3)
                     System.out.println(list.getJSONObject(i).get("name") + "\t\t" + list.getJSONObject(i).get("Personal_Number") + "\t" + list.getJSONObject(i).get("ID"));
@@ -28,11 +26,9 @@ public class List {
 
     public void verbose() throws JSONException, IOException {
         DBControl db = new DBControl();
-        JSONArray list = db.dbRecall();
+        JSONArray list = db.dbRead();
         System.out.println("Name" + "\t" + "PN" + "\t\t\t" + "ID" + "\t\t\t" + "Boat/Type" + "\t\t\t" + "size");
-        File file = new File("/home/ghayth/Desktop/DB.json");
-        if (!file.createNewFile()) {
-
+        if (!db.file.createNewFile()) {
             for (int i = 0; i < list.length(); i++) {
                 if (list.getJSONObject(i).get("name").toString().length() <= 3) {
                     System.out.print(list.getJSONObject(i).get("name") + "\t\t" + list.getJSONObject(i).get("Personal_Number") + "\t" + list.getJSONObject(i).get("ID"));

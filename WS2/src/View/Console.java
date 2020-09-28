@@ -1,5 +1,7 @@
 package View;
 
+import Model.Control.Remove;
+
 import java.util.Scanner;
 
 public class Console {
@@ -8,6 +10,11 @@ public class Console {
     protected String pn;
     protected String type;
     protected String size;
+    protected int num;
+    public static final String red = "\u001B[31m";
+    public static final String green = "\u001B[32m";
+    public static final String yellow = "\u001B[33m";
+    public static final String blue = "\u001B[34m";
 
     public Console() {
     }
@@ -35,7 +42,7 @@ public class Console {
             }
         }
         if (!chk)
-            System.out.println("This is NOT an option. Please try again..");
+            System.out.println(red + "This is NOT an option. Please try again..");
 
         return chk;
     }
@@ -49,7 +56,7 @@ public class Console {
         Scanner scan = new Scanner(System.in);
         pn = scan.nextLine();
         while (!checkPN(pn)) {
-            System.out.println("Person NUmber must be 10 digits. Pleas try again");
+            System.out.println(red + "Person NUmber must be 10 digits. Pleas try again");
             pn();
         }
     }
@@ -61,12 +68,12 @@ public class Console {
         if (chose.length() == 10) {
             digit = true;
         }
-       for (int i = 0; i < pn.length() ; i++){
-           if (Character.isAlphabetic(pn.charAt(i))){
-               letter = false;
-               break;
-           }
-       }
+        for (int i = 0; i < pn.length(); i++) {
+            if (Character.isAlphabetic(pn.charAt(i))) {
+                letter = false;
+                break;
+            }
+        }
         if (letter && digit)
             return true;
         else
@@ -76,6 +83,18 @@ public class Console {
     public void type() {
         Scanner scan = new Scanner(System.in);
         type = scan.nextLine();
+    }
+
+    public void number(int listLength) {
+        if (listLength > 0) {
+            Scanner scan = new Scanner(System.in);
+            num = scan.nextInt();
+            while (num < 1 || num > listLength) {
+                System.out.println(red + "This is not an option");
+                number(listLength);
+            }
+        } else
+            System.out.println(red + "This member does not has any boat.");
     }
 
     public void size() {
