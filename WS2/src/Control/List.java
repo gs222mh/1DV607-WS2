@@ -6,8 +6,8 @@ import org.json.JSONException;
 import java.io.File;
 import java.io.IOException;
 
-public class View {
-    public View() {
+public class List {
+    public List() {
     }
 
     public void compact() throws JSONException, IOException {

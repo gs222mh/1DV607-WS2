@@ -9,8 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class RemoveMember {
-    public RemoveMember(Member member) throws JSONException {
+public class Remove {
+    public Remove(Member member) throws JSONException {
         remove(member);
     }
 

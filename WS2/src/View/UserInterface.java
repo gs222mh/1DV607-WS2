@@ -12,10 +12,9 @@ public class UserInterface {
     Member member;
     Boat boat;
     Register register;
-    RegistBoat addBoat;
-    RemoveMember remove;
-    View list;
-    CheckPN check = new CheckPN();
+    Remove remove;
+    List list;
+    DBControl check = new DBControl();
 
     public void start() throws IOException, JSONException {
 
@@ -38,24 +37,24 @@ public class UserInterface {
                 Value.name();
                 System.out.println("Member's PersonNumber:");
                 Value.pn();
-                if (!check.check(Value.pn)) {
-                    member = new Member(Value.name, Value.pn);
+                member = new Member(Value.name, Value.pn);
+                if (!check.check(member)) {
                     register = new Register(member);
                 } else
                     System.out.println("Our DB has already this PN.");
             } else if (chose.equals("2")) {
                 System.out.println("Member's PersonNumber:");
                 Value.pn();
-                if (check.check(Value.pn)) {
-                    member = new Member(Value.name, Value.pn);
-                    remove = new RemoveMember(member);
+                member = new Member(Value.name, Value.pn);
+                if (check.check(member)) {
+                    remove = new Remove(member);
                 } else
                     System.out.println("Our DB has not this PN.");
             } else if (chose.equals("3")) {
-                list = new View();
+                list = new List();
                 list.compact();
             } else if (chose.equals("4")) {
-                list = new View();
+                list = new List();
                 list.verbose();
             } else if (chose.equals("5")) {
 
@@ -71,14 +70,14 @@ public class UserInterface {
             } else if (chose.equals("7")) {
                 System.out.println("Member's PersonNumber:");
                 Value.pn();
-                if (check.check(Value.pn)) {
+                member = new Member(Value.name, Value.pn);
+                if (check.check(member)) {
                     System.out.println("Boats's type:");
                     Value.type();
                     System.out.println("Boat's size:");
                     Value.size();
-                    member = new Member(Value.name, Value.pn);
                     boat = new Boat(Value.type, Value.size);
-                    addBoat = new RegistBoat(boat, member);
+                    register = new Register(boat, member);
                 } else {
                     System.out.println("Sorry we did not find this Person Number in our DB");
                 }
