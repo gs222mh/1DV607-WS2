@@ -102,17 +102,22 @@ public class Console {
     }
 
     public void number(int listLength) {
-        if (listLength > 0) {
-            Scanner scan = new Scanner(System.in);
-            num = scan.nextInt();
-            while (num < 1 || num > listLength) {
-                System.out.println(red + "This is not an option");
-                number(listLength);
-            }
-        } else
-            System.out.println(red + "This member does not has any boat.");
-    }
+        try {
+            if (listLength > 0) {
+                Scanner scan = new Scanner(System.in);
+                num = scan.nextInt();
+                while (num < 1 || num > listLength) {
+                    System.out.println(red + "This is not an option");
+                    number(listLength);
+                }
+            } else
+                System.out.println(red + "This member does not has any boat.");
+        } catch (Exception e) {
+            System.out.println(red + "This is not an option");
+            number(listLength);
+        }
 
+    }
     public void size() {
         Scanner scan = new Scanner(System.in);
         size = scan.nextLine();

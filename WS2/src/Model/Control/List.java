@@ -27,7 +27,7 @@ public class List {
     public void verbose() throws JSONException, IOException {
         DBControl db = new DBControl();
         JSONArray list = db.dbRead();
-        System.out.println("Name" + "\t" + "PN" + "\t\t\t" + "ID" + "\t\t\t" + "Boat/Type" + "\t\t\t" + "size");
+        System.out.println("Name" + "\t" + "PN" + "\t\t\t" + "ID" + "\t\t\t" + "Boat/Type" + "\t\t" + "size");
         if (!db.file.createNewFile()) {
             for (int i = 0; i < list.length(); i++) {
                 if (list.getJSONObject(i).get("name").toString().length() <= 3) {
@@ -36,15 +36,15 @@ public class List {
                         for (int j = 0; j < list.getJSONObject(i).getJSONArray("Boats").length(); j++) {
                             if (j == 0) {
                                 if (list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type").toString().length() <= 3)
-                                    System.out.println("\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
+                                    System.out.println("\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
                                 else {
-                                    System.out.println("\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
+                                    System.out.println("\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
                                 }
                             } else {
                                 if (list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type").toString().length() <= 3)
-                                    System.out.println("\t\t\t\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
-                                else
                                     System.out.println("\t\t\t\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
+                                else
+                                    System.out.println("\t\t\t\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
                             }
                         }
                     } else {
@@ -56,15 +56,15 @@ public class List {
                         for (int j = 0; j < list.getJSONObject(i).getJSONArray("Boats").length(); j++) {
                             if (j == 0) {
                                 if (list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type").toString().length() <= 3)
-                                    System.out.println("\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
+                                    System.out.println("\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
                                 else {
-                                    System.out.println("\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
+                                    System.out.println("\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
                                 }
                             } else {
                                 if (list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type").toString().length() <= 3)
-                                    System.out.println("\t\t\t\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
-                                else
                                     System.out.println("\t\t\t\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
+                                else
+                                    System.out.println("\t\t\t\t\t\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("type") + "\t\t\t" + list.getJSONObject(i).getJSONArray("Boats").getJSONObject(j).get("size"));
                             }
                         }
                     } else {

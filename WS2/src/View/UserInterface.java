@@ -45,6 +45,8 @@ public class UserInterface {
                     register = new Register(member);
                 } else
                     System.out.println(red + "Our DB has already this PN.");
+
+
             } else if (chose.equals("2")) {
                 System.out.println(yellow + "Member's PersonNumber:");
                 Value.pn();
