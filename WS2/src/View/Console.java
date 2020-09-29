@@ -50,6 +50,14 @@ public class Console {
     public void name() {
         Scanner scan = new Scanner(System.in);
         name = scan.nextLine();
+        while (true) {
+            if (name.length() < 2 || name.length() > 7) {
+                System.out.println(red + "The name should be between 2 and 7 characters");
+                name();
+            } else {
+                break;
+            }
+        }
     }
 
     public void pn() {
@@ -83,6 +91,14 @@ public class Console {
     public void type() {
         Scanner scan = new Scanner(System.in);
         type = scan.nextLine();
+        while (true) {
+            if (type.length() < 2 || type.length() > 7) {
+                System.out.println(red + "The type should be between 2 and 7 characters");
+                type();
+            } else {
+                break;
+            }
+        }
     }
 
     public void number(int listLength) {

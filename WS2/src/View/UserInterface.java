@@ -36,7 +36,7 @@ public class UserInterface {
             String chose = Value.myChoice();
 
             if (chose.equals("1")) {
-                System.out.println(yellow + "Member's name:");
+                System.out.println(yellow + "Member's name (Atl east 2 and Max 7 characters):");
                 Value.name();
                 System.out.println(yellow + "Member's PersonNumber:");
                 Value.pn();
@@ -65,7 +65,7 @@ public class UserInterface {
                 member = new Member(Value.name, Value.pn);
                 if (check.check(member)) {
                     String oldPN = Value.pn;
-                    System.out.println(green + "New member name: ");
+                    System.out.println(green + "New member name (Atl east 2 and Max 7 characters): ");
                     Value.name();
                     System.out.println(green + "New member Person number: ");
                     Value.pn();
@@ -88,7 +88,7 @@ public class UserInterface {
                 Value.pn();
                 member = new Member(Value.name, Value.pn);
                 if (check.check(member)) {
-                    System.out.println(yellow + "Boats's type:");
+                    System.out.println(yellow + "Boats's type (Atl east 2 and Max 7 characters):");
                     Value.type();
                     System.out.println(yellow + "Boat's size:");
                     Value.size();
@@ -125,7 +125,7 @@ public class UserInterface {
                         Value.number(remove.size);
                     }
                     if (Value.num != 0 && remove.size != 0) {
-                        System.out.println(green + "Boats's new type:");
+                        System.out.println(green + "Boats's new type (Atl east 2 and Max 7 characters):");
                         Value.type();
                         System.out.println(green + "Boat's new size:");
                         Value.size();

@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 
 
 import java.util.Random;
+import java.util.UUID;
 
 
 public class Register {
@@ -47,12 +48,15 @@ public class Register {
         String firstCharFromPn = String.valueOf(member.getPn().charAt(0));
         String secondCharFromPn = String.valueOf(member.getPn().charAt(1));
         Random rnd = new Random();
-        int randomNumber = rnd.nextInt(9) + 1;
-        String rndNum = String.valueOf(randomNumber);
+        String chars = "abcdefghijklmnopqrstuvwxyz";
+        char c1 = chars.charAt(rnd.nextInt(chars.length()));
+        char c2 = chars.charAt(rnd.nextInt(chars.length()));
+        String rndChar1 = String.valueOf(c1);
+        String rndChar2 = String.valueOf(c2);
         int lng = member.getPn().length();
         String lastCharFromPn = String.valueOf(member.getPn().charAt(lng - 2));
         String secondLastCharFromPn = String.valueOf(member.getPn().charAt(lng - 1));
-        id = firstCharFromName + secondCharFromName + firstCharFromPn + secondCharFromPn + rndNum + lastCharFromPn + secondLastCharFromPn;
+        id = firstCharFromName + secondCharFromName + firstCharFromPn + secondCharFromPn + rndChar1 + rndChar2 + lastCharFromPn + secondLastCharFromPn;
     }
 
     public void search(Member member) throws JSONException {
