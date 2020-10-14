@@ -83,7 +83,6 @@ public class UserInterface {
                 System.out.println(MEMBER_PN);
                 value.pn();
                 member = new Member(value.name, value.pn);
-                register = new Register();
                 register.search(member);
                 if (!register.result) {
                     value.feedBackNotExisted();
@@ -113,13 +112,13 @@ public class UserInterface {
                 member = new Member(value.name, value.pn);
                 if (register.check(member)) {
                     remove.listBoat(member, register);
-                    if (remove.size != 0) {
+                    if (remove.numOfBoat != 0) {
                         System.out.println("Chose the boat you would like to remove (write the number)");
-                        value.number(remove.size);
+                        value.number(remove.numOfBoat);
                     } else {
                         System.out.println("This person does not have any boat");
                     }
-                    if (value.num != 0 && remove.size != 0)
+                    if (value.num != 0 && remove.numOfBoat != 0)
                         remove.removeBoat(member, register, value.num);
                 } else {
                     value.feedBackNotExisted();
@@ -132,13 +131,13 @@ public class UserInterface {
                 member = new Member(value.name, value.pn);
                 if (register.check(member)) {
                     remove.listBoat(member, register);
-                    if (remove.size != 0) {
+                    if (remove.numOfBoat != 0) {
                         System.out.println("Chose the boat you would like to edit (write the number)");
-                        value.number(remove.size);
+                        value.number(remove.numOfBoat);
                     } else {
                         System.out.println("This person does not have any boat");
                     }
-                    if (value.num != 0 && remove.size != 0) {
+                    if (value.num != 0 && remove.numOfBoat != 0) {
                         System.out.println("1.Sailboat \n2.Motorsailer \n3.kayak/Canoe \n4.Other");
                         value.type();
                         System.out.println("Boat's new size:");
@@ -162,7 +161,7 @@ public class UserInterface {
 
                 // choice 10 is to close the application
             } else if (chose.equals("10")) {
-                check.dbWrite(register.listList);
+                check.dbWrite(register.dbAfter);
                 break;
             } else {
                 System.out.println("This is not an option. Please try again..");

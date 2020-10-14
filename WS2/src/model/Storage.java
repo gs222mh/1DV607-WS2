@@ -15,11 +15,11 @@ public class Storage {
      * The constant file.
      */
 //Here you can write the path of the DB'
-    public File file = new File("/home/ghayth/Desktop/DB.json");
+    public File file = new File("../DB.json");
     /**
      * The constant loadFile.
      */
-    public JSONArray loadFile = new JSONArray();
+    private JSONArray loadFile = new JSONArray();
 
     /**
      * Instantiates a new Storage.
@@ -34,9 +34,8 @@ public class Storage {
      *
      * @return the json array
      */
-//Method to read json file and add all line to JsonArray
+    //Method to read json file and add all line to JsonArray
     public JSONArray dbRead() {
-
         try (Scanner sT = new Scanner(file)) {
             String text = "";
             JSONObject obj;
@@ -45,20 +44,18 @@ public class Storage {
                 obj = new JSONObject(text);
                 loadFile.put(obj);
             }
-
         } catch (IOException | JSONException e) {
             e.getMessage();
         }
         return loadFile;
     }
 
-
     /**
      * Db write.
      *
      * @param list the list
      */
-//Get back JsonArray and rewrite it again to file
+    //Get back JsonArray and rewrite it again to file
     public void dbWrite(JSONArray list) {
         try (PrintWriter writer = new PrintWriter(file)) {
             //Remove all thing from file
@@ -67,7 +64,6 @@ public class Storage {
                 try (FileWriter input = new FileWriter(file, true)) {
                     for (int i = 0; i < list.length(); i++)
                         input.write(list.getJSONObject(i) + "\n");
-
                 }
             } else {
                 try (FileWriter fr = new FileWriter(file, true)) {

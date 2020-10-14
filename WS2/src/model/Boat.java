@@ -48,7 +48,6 @@ public class Boat {
             this.type = "kayak/Canoe";
         if (numberOftype == 4)
             this.type = "Other";
-
     }
 
     /**

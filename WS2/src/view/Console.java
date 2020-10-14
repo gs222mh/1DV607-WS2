@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Console {
     private static final String BOAT = "Boats";
     private static final String NOTOPTION = "This is not an option";
+
     protected String chose;
     protected String name;
     protected String pn;
@@ -46,7 +47,6 @@ public class Console {
         }
         if (!chk)
             System.out.println("This is not an option. Please try again..");
-
         return chk;
     }
 
@@ -151,14 +151,14 @@ public class Console {
     }
 
     public void printCompact(Register reg, int i) throws JSONException {
-        System.out.println("Name: " + reg.listBeforeWrite.getJSONObject(i).get("name") + "\nID: " + reg.listBeforeWrite.getJSONObject(i).get("ID") + "\nNumber of Boats: " + reg.listBeforeWrite.getJSONObject(i).getJSONArray(BOAT).length());
+        System.out.println("Name: " + reg.dbBefore.getJSONObject(i).get("name") + "\nID: " + reg.dbBefore.getJSONObject(i).get("ID") + "\nNumber of Boats: " + reg.dbBefore.getJSONObject(i).getJSONArray(BOAT).length());
     }
 
     public void printVerbose(Register reg, int i) throws JSONException {
-        System.out.println("Name: " + reg.listBeforeWrite.getJSONObject(i).get("name") + "\nPN: " + reg.listBeforeWrite.getJSONObject(i).get("Personal_Number") + "\nID: " + reg.listBeforeWrite.getJSONObject(i).get("ID"));
-        if (reg.listBeforeWrite.getJSONObject(i).getJSONArray(BOAT).length() != 0) {
-            for (int j = 0; j < reg.listBeforeWrite.getJSONObject(i).getJSONArray(BOAT).length(); j++) {
-                System.out.println("Boat " + (j + 1) + "\nType: " + reg.listBeforeWrite.getJSONObject(i).getJSONArray(BOAT).getJSONObject(j).get("type") + "\nSize: " + reg.listBeforeWrite.getJSONObject(i).getJSONArray(BOAT).getJSONObject(j).get("size"));
+        System.out.println("Name: " + reg.dbBefore.getJSONObject(i).get("name") + "\nPN: " + reg.dbBefore.getJSONObject(i).get("Personal_Number") + "\nID: " + reg.dbBefore.getJSONObject(i).get("ID"));
+        if (reg.dbBefore.getJSONObject(i).getJSONArray(BOAT).length() != 0) {
+            for (int j = 0; j < reg.dbBefore.getJSONObject(i).getJSONArray(BOAT).length(); j++) {
+                System.out.println("Boat " + (j + 1) + "\nType: " + reg.dbBefore.getJSONObject(i).getJSONArray(BOAT).getJSONObject(j).get("type") + "\nSize: " + reg.dbBefore.getJSONObject(i).getJSONArray(BOAT).getJSONObject(j).get("size"));
             }
         }
     }

@@ -1,5 +1,6 @@
 package main;
 
+import controller.Register;
 import view.UserInterface;
 import org.json.JSONException;
 import model.Storage;
@@ -18,11 +19,11 @@ public class Program {
      * @throws JSONException the json exception
      */
 // The main class, Here you can start the program
-    public static void main(String[] args) throws JSONException{
+    public static void main(String[] args) throws JSONException {
         Storage db = new Storage();
         UserInterface ui = new UserInterface();
+        Register reg = new Register(ui);
 
-        db.dbRead();
-        ui.start();
+        reg.loadProgram(db);
     }
 }

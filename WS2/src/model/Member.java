@@ -26,12 +26,6 @@ public class Member {
     }
 
     /**
-     * Instantiates a new Member.
-     */
-    public Member() {
-    }
-
-    /**
      * Sets name.
      *
      * @param name the name

@@ -12,11 +12,11 @@ import view.Console;
 public class Remove {
     private Console c = new Console();
     private static final String PN = "Personal_Number";
-    private int num = 1;
+    private int boatCount = 1;
     /**
      * The Size.
      */
-    public int size = 0;
+    public int numOfBoat = 0;
 
     /**
      * Instantiates a new Remove.
@@ -33,13 +33,13 @@ public class Remove {
      * @throws JSONException the json exception
      */
     public void removeMember(Member member, Register reg) throws JSONException {
-        JSONArray arr = reg.listBeforeWrite;
-        for (int i = 0; i < arr.length(); i++) {
-            if (arr.getJSONObject(i).get(PN).equals(member.getPn())) {
-                arr.remove(i);
+        JSONArray list = reg.dbBefore;
+        for (int i = 0; i < list.length(); i++) {
+            if (list.getJSONObject(i).get(PN).equals(member.getPn())) {
+                list.remove(i);
             }
         }
-        reg.test(arr);
+        reg.reWriteOnList(list);
     }
 
 
@@ -51,15 +51,15 @@ public class Remove {
      * @throws JSONException the json exception
      */
     public void listBoat(Member member, Register reg) throws JSONException {
-        JSONArray arr = reg.listBeforeWrite;
-        for (int i = 0; i < arr.length(); i++) {
-            if (arr.getJSONObject(i).get(PN).equals(member.getPn())) {
-                JSONArray list = arr.getJSONObject(i).getJSONArray("Boats");
-                size = list.length();
-                c.printboatList(list, num);
+        JSONArray list = reg.dbBefore;
+        for (int i = 0; i < list.length(); i++) {
+            if (list.getJSONObject(i).get(PN).equals(member.getPn())) {
+                JSONArray boatList = list.getJSONObject(i).getJSONArray("Boats");
+                numOfBoat = boatList.length();
+                c.printboatList(boatList, boatCount);
             }
         }
-        num = 1;
+        boatCount = 1;
     }
 
     /**
@@ -71,15 +71,15 @@ public class Remove {
      * @throws JSONException the json exception
      */
     public void removeBoat(Member member, Register reg, int number) throws JSONException {
-        JSONArray arr = reg.listBeforeWrite;
+        JSONArray list = reg.dbBefore;
         number = number - 1;
-        for (int i = 0; i < arr.length(); i++) {
-            if (arr.getJSONObject(i).get(PN).equals(member.getPn())) {
-                JSONArray list = arr.getJSONObject(i).getJSONArray("Boats");
-                list.remove(number);
+        for (int i = 0; i < list.length(); i++) {
+            if (list.getJSONObject(i).get(PN).equals(member.getPn())) {
+                JSONArray boatList = list.getJSONObject(i).getJSONArray("Boats");
+                boatList.remove(number);
             }
         }
-        reg.test(arr);
+        reg.reWriteOnList(list);
     }
 }
 

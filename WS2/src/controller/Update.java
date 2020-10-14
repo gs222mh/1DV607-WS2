@@ -11,8 +11,7 @@ import view.Console;
  * The type Update.
  */
 public class Update {
-    private Register re = new Register();
-    private Console c = new Console();
+    private Console console = new Console();
     private static final String PN = "Personal_Number";
 
     /**
@@ -31,28 +30,28 @@ public class Update {
      * @throws JSONException the json exception
      */
     public void updateMember(Member member, Register reg, String oldPn) throws JSONException {
-        JSONArray arr = reg.listBeforeWrite;
-        for (int i = 0; i < arr.length(); i++) {
-            if (arr.getJSONObject(i).get(PN).equals(oldPn)) {
+        JSONArray list = reg.dbBefore;
+        for (int i = 0; i < list.length(); i++) {
+            if (list.getJSONObject(i).get(PN).equals(oldPn)) {
                 if (!oldPn.equals(member.getPn())) {
-                    if (!re.check(member)) {
-                        arr.getJSONObject(i).put("name", member.getName());
-                        arr.getJSONObject(i).put(PN, member.getPn());
+                    if (!reg.check(member)) {
+                        list.getJSONObject(i).put("name", member.getName());
+                        list.getJSONObject(i).put(PN, member.getPn());
                         reg.idGenerator(member);
-                        arr.getJSONObject(i).put("ID", reg.id);
+                        list.getJSONObject(i).put("ID", reg.id);
                     } else {
-                        c.feedBackExisted();
+                        console.feedBackExisted();
                     }
                 } else {
-                    arr.getJSONObject(i).put("name", member.getName());
-                    arr.getJSONObject(i).put(PN, member.getPn());
+                    list.getJSONObject(i).put("name", member.getName());
+                    list.getJSONObject(i).put(PN, member.getPn());
                     reg.idGenerator(member);
-                    arr.getJSONObject(i).put("ID", reg.id);
+                    list.getJSONObject(i).put("ID", reg.id);
                     break;
                 }
             }
         }
-        reg.test(arr);
+        reg.reWriteOnList(list);
     }
 
     /**
@@ -65,15 +64,15 @@ public class Update {
      * @throws JSONException the json exception
      */
     public void updateBoat(Boat boat, Member member, Register reg, int pos) throws JSONException {
-        JSONArray arr = reg.listBeforeWrite;
+        JSONArray list = reg.dbBefore;
         pos = pos - 1;
-        for (int i = 0; i < arr.length(); i++) {
-            if (arr.getJSONObject(i).get(PN).equals(member.getPn())) {
-                JSONArray list = arr.getJSONObject(i).getJSONArray("Boats");
-                list.getJSONObject(pos).put("type", boat.getType());
-                list.getJSONObject(pos).put("size", boat.getSize());
+        for (int i = 0; i < list.length(); i++) {
+            if (list.getJSONObject(i).get(PN).equals(member.getPn())) {
+                JSONArray boatList = list.getJSONObject(i).getJSONArray("Boats");
+                boatList.getJSONObject(pos).put("type", boat.getType());
+                boatList.getJSONObject(pos).put("size", boat.getSize());
             }
         }
-        reg.test(arr);
+        reg.reWriteOnList(list);
     }
 }

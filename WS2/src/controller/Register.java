@@ -6,6 +6,7 @@ import model.Storage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import view.UserInterface;
 
 import java.util.Random;
 
@@ -17,15 +18,15 @@ public class Register {
     /**
      * The Db.
      */
-    protected Storage db = new Storage();
+    public Storage db = new Storage();
     /**
-     * The List before write.
+     * The Db before.
      */
-    public JSONArray listBeforeWrite = db.dbRead();
+    public JSONArray dbBefore = db.dbRead();
     /**
-     * The List list.
+     * The Db after.
      */
-    public JSONArray listList = new JSONArray();
+    public JSONArray dbAfter = new JSONArray();
     /**
      * The Id.
      */
@@ -45,13 +46,23 @@ public class Register {
     }
 
     /**
-     * Test.
+     * Instantiates a new Register.
      *
-     * @param lastList the last list
+     * @param ui the ui
+     * @throws JSONException the json exception
      */
-    public void test(JSONArray lastList) {
-        listBeforeWrite = lastList;
-        this.listList = lastList;
+    public Register(UserInterface ui) throws JSONException {
+        ui.start();
+    }
+
+    /**
+     * Re write on list.
+     *
+     * @param dbNow the db now
+     */
+    public void reWriteOnList(JSONArray dbNow) {
+        dbBefore = dbNow;
+        this.dbAfter = dbNow;
     }
 
     /**
@@ -68,8 +79,18 @@ public class Register {
         addMem.put(PN, member.getPn());
         addMem.put("ID", idGenerator(member));
         addMem.put("Boats", arr);
-        listBeforeWrite.put(addMem);
-        test(listBeforeWrite);
+        dbBefore.put(addMem);
+        reWriteOnList(dbBefore);
+    }
+
+
+    /**
+     * Load program.
+     *
+     * @param db the db
+     */
+    public void loadProgram(Storage db) {
+        db.dbRead();
     }
 
     /**
@@ -106,9 +127,9 @@ public class Register {
     public boolean check(Member member) {
         boolean checking = false;
         try {
-            if (listBeforeWrite.length() > 0) {
-                for (int i = 0; i < listBeforeWrite.length(); i++) {
-                    if (listBeforeWrite.getJSONObject(i).get(PN).equals(member.getPn())) {
+            if (dbBefore.length() > 0) {
+                for (int i = 0; i < dbBefore.length(); i++) {
+                    if (dbBefore.getJSONObject(i).get(PN).equals(member.getPn())) {
                         checking = true;
                     }
                 }
@@ -129,7 +150,7 @@ public class Register {
      */
 //Search in DB using JsonArray in all pos
     public String search(Member member) throws JSONException {
-        JSONArray list = listBeforeWrite;
+        JSONArray list = dbBefore;
         String searchResult = "";
         for (int i = 0; i < list.length(); i++) {
             if (list.getJSONObject(i).get(PN).equals(member.getPn())) {
@@ -151,11 +172,10 @@ public class Register {
      */
 //Read DB add boat depends on member's PN to the JsonArray and rewrite it again
     public void addBoat(Boat boat, Member member) throws JSONException {
-        JSONArray list = listBeforeWrite;
-        org.json.JSONObject boats = new org.json.JSONObject();
+        JSONArray list = dbBefore;
+        JSONObject boats = new JSONObject();
         boats.put("type", boat.getType());
         boats.put("size", boat.getSize());
-
         for (int i = 0; i < list.length(); i++) {
             if (list.getJSONObject(i).get(PN).equals(member.getPn())) {
                 JSONArray add = list.getJSONObject(i).getJSONArray("Boats");
@@ -163,6 +183,6 @@ public class Register {
                 break;
             }
         }
-        test(list);
+        reWriteOnList(list);
     }
 }

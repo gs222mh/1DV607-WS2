@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/WS2_jar</output-path>
     <root id="archive" name="WS2.jar">
       <element id="module-output" name="WS2" />
-      <element id="extracted-dir" path="$USER_HOME$/1DV607-WS2/JAR/java-json.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../java-json.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

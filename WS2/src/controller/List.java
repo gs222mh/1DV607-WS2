@@ -9,7 +9,7 @@ import view.Console;
  * The type List.
  */
 public class List {
-    private static final Console c = new Console();
+    private Console c = new Console();
 
     /**
      * Instantiates a new List.
@@ -24,9 +24,9 @@ public class List {
      * @param reg the reg
      * @throws JSONException the json exception
      */
-//List all member
+    //List all member
     public void compact(Register reg) throws JSONException {
-        JSONArray list = reg.listBeforeWrite;
+        JSONArray list = reg.dbBefore;
         for (int i = 0; i < list.length(); i++) {
             c.printCompact(reg, i);
             c.printNumberSign();
@@ -40,7 +40,7 @@ public class List {
      * @throws JSONException the json exception
      */
     public void verbose(Register reg) throws JSONException {
-        JSONArray list = reg.listBeforeWrite;
+        JSONArray list = reg.dbBefore;
         for (int i = 0; i < list.length(); i++) {
             c.printVerbose(reg, i);
             c.printNumberSign();
